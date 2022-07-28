@@ -1,0 +1,17 @@
+{
+  "name": "interval-next",
+  "version": "1.0.0-rc1",
+  "description": "Enhanced interval features for Node.js, such as promisified interval and human readable time parsing.",
+  "main": "index.js",
+  "keywords": [
+    "better interval",
+    "timer",
+    "cron job",
+    "async interval",
+    "promise interval"
+  ],
+  "author": "Kaan Karaman",
+  "dependencies": {
+    "numbered": "^1.1.0"
+  }
+}
