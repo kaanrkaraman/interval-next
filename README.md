@@ -9,7 +9,7 @@ Interval-next introduces two additional functions similar to `setInterval()`, as
 ### IntervalNext .set(\<callbackFn>, \<human readable time>,\<immediate: boolean>?)
 ```js
 const IntervalNext = require("interval-next")
-const Interval =IntervalNext.set(<callbackFn>, <humanReadable>)
+const Interval = IntervalNext.set(<callbackFn>, <humanReadable>)
 ```
 
 ### IntervalNext.setAsync(\<callbackFn>, \<human readable time>,\<immediate: boolean>?)
