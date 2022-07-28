@@ -1,10 +1,10 @@
 {
   "name": "interval-next",
-  "version": "1.0.0-rc2",
+  "version": "1.0.0-alpha1",
   "description": "Enhanced interval features for Node.js, such as promisified interval and human readable time parsing.",
   "homepage": "https://github.com/1000snowy/interval-next#readme",
   "bugs": {
-    "url" : "https://github.com/1000snowy/interval-next/issues"
+    "url": "https://github.com/1000snowy/interval-next/issues"
   },
   "main": "index.js",
   "keywords": [
