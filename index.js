@@ -11,29 +11,42 @@ units.year = 365 * units.day;
 
 const set = (callback, time, immediate = false, _ = new Array()) => {
     if (!callback || typeof callback !== "function") return console.error("IntervalError: Callback must be a function.");
+    if (!time || typeof time !== "string") throw new Error("IntervalError: Time must be a string.");
     if (typeof immediate !== "boolean") throw new Error("IntervalError: Immediate must be a boolean.");
-    const match = time.match(/(second|minute|hour|day|month|year)/s);
+    time = time.trim().replace(/(\sand\s|\s+|,\s+)/gs, " ");
+    const match = time.match(/(second|minute|hour|day|month|year)/gs);
+    const arrayifiedTime = time.split(" ");
 
-    _.push(time.slice(0, match.index), time.slice(match.index));
-    const amount = _[0], unit = units[_[1]], schedule = unit * amount;
+    time = 0;
+    match.forEach((undefined, index) => {
+        const amount = arrayifiedTime[index * 2], timeUnit = arrayifiedTime[index * 2 + 1]
+        time += units[timeUnit] * amount;
+    });
     
     if (immediate) callback();
-    return setInterval(callback, schedule);
+    return setInterval(callback, time);
 }
 
 const setAsync = (callback, time, immediate = false, _ = new Array()) => {
     if (!callback || typeof callback !== "function") throw new Error("IntervalError: Callback must be a function.");
+    if (!time || typeof time !== "string") throw new Error("IntervalError: Time must be a string.");
     if (typeof immediate !== "boolean") throw new Error("IntervalError: Immediate must be a boolean.");
-    const match = time.match(/(second|minute|hour|day|month|year)/s);
+    time = time.trim().replace(/(\sand\s|\s+|,\s+)/gs, " ");
+    const match = time.match(/(second|minute|hour|day|month|year)/gs);
+    const arrayifiedTime = time.split(" ");
+    
+    time = 0;
+    match.forEach((undefined, index) => {
+        const amount = arrayifiedTime[index * 2], timeUnit = arrayifiedTime[index * 2 + 1]
+        time += units[timeUnit] * amount;
+    });
 
-    _.push(time.slice(0, match.index), time.slice(match.index));
-    const amount = _[0], unit = units[_[1]], schedule = unit * amount;
-    let intId; 
+    let intId;
 
     new Promise((undefined, reject) => {
         try {
             if(immediate) callback();
-            intId = setInterval(callback, schedule);
+            intId = setInterval(callback, time);
         } catch (err) {
             reject(err);
         }
